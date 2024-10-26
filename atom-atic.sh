@@ -30,6 +30,5 @@ fi
 notify-send "atom-atic" "Pushing image, preparing for upgrade or rebase"
 podman push localhost/atom-atic:latest localhost:5000/atom-atic:latest
 notify-send "atom-atic" "Don't turn your computer off, unless you like emergency shells"
-rpm-ostree rebase ostree-unverified-registry:localhost:5000/atom-atic:latest ||
-	rpm-ostree upgrade
-notify-send "atom-atic" "You can now check `rpm-ostree status`"
+rpm-ostree upgrade
+notify-send "atom-atic" "`rpm-ostree status | head -n1`"
