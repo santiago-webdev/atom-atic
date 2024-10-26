@@ -44,7 +44,7 @@ EOL
 
 cp ./atom-atic.sh ~/.local/bin
 
-echo "Starting rebasing"
 podman run -d -p 5000:5000 --restart=always --name registry registry:latest
 podman push localhost/atom-atic:latest localhost:5000/atom-atic:latest
 rpm-ostree rebase ostree-unverified-registry:localhost:5000/atom-atic:latest
+notify "atom-atic" "Rebase done, check 'rpm-ostree status'"

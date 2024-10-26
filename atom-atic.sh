@@ -27,8 +27,5 @@ if [[ $? -eq 125 ]]; then
 	exit
 fi
 
-notify-send "atom-atic" "Pushing image, preparing for upgrade or rebase"
 podman push localhost/atom-atic:latest localhost:5000/atom-atic:latest
-notify-send "atom-atic" "Don't turn your computer off, unless you like emergency shells"
-rpm-ostree upgrade
-notify-send "atom-atic" "`rpm-ostree status | head -n1`"
+notify-send "atom-atic" "Image pushed to local registry"
