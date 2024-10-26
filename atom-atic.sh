@@ -21,7 +21,7 @@ fi
 
 cd $CONFIG
 notify-send "atom-atic" "About to build your image"
-podman build -t atom-atic -f ./Containerfile
+podman build -t atom-atic -f ./Containerfile --pull=always
 if [[ $? -eq 125 ]]; then
 	notify-send "atom-atic" "Failed build, exiting: ~/atom-atic.log"
 	exit

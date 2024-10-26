@@ -25,8 +25,8 @@ tee "$TIMER" > /dev/null <<EOL
 Description=Run atom-atic.sh script three times a day
 
 [Timer]
-OnCalendar=*-*-* 00,11,17:00:00
-Persistent=true
+OnBootSec=1h
+OnUnitInactiveSec=2d
 
 [Install]
 WantedBy=default.target
@@ -47,4 +47,4 @@ cp ./atom-atic.sh ~/.local/bin
 podman run -d -p 5000:5000 --restart=always --name registry registry:latest
 podman push localhost/atom-atic:latest localhost:5000/atom-atic:latest
 rpm-ostree rebase ostree-unverified-registry:localhost:5000/atom-atic:latest
-notify "atom-atic" "Rebase done, check 'rpm-ostree status'"
+notify-send "atom-atic" "Rebase done, check 'rpm-ostree status'"
