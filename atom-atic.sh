@@ -19,8 +19,8 @@ if ! podman start registry; then
     podman run -d -p 5000:5000 --restart=always --name registry registry:latest
 fi
 
-cd $CONFIG
-notify-send "atom-atic" "About to build your image"
+cd $CONFIG || exit && notify-send "atom-atic" "Cannot access atom-atic config"
+notify-send "atom-atic" "Building your image"
 podman build -t atom-atic -f ./Containerfile --pull=always
 if [[ $? -eq 125 ]]; then
 	notify-send "atom-atic" "Failed build, exiting: ~/atom-atic.log"

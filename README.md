@@ -13,13 +13,23 @@ touch "$XDG_CONFIG_HOME/atom-atic/Containerfile"
 
 Run the install.sh, which does the following:
 
-- Add a systemd user service, that should be running at least once during the day
 - Enable the rebasing to locally hosted insecure images, necessary since I don't
-  know how to sign the images at the moment
-- Copies an `atom-atic.sh` shell script at your `~/.local/bin/atom-atic.sh`
-    - The script ensures your host has a local registry container running, it's the one
-      that stores the built image and subsequently serves it to `rpm-ostree rebase ...`
-- Build your image
-- Create local registry
-- Push image to it
-- Rebase to it
+know how to sign the images at the moment
+- Copy the `atom-atic.sh` shell script to `~/.local/bin/atom-atic.sh`
+- Add a systemd user service that runs this script the every two days
+- Run the script `atom-atic.sh` manually once
+    - Ensure your host has a local registry running, it'll be the one that stores
+    the built image and subsequently serves it to `rpm-ostree rebase ...`
+        - For this point I might include a "atom-atic" registry shipped as a quadlet
+        in the future, because if you try to upgrade and the registry is not
+        running it will fail instead of printing `No upgrade available.`
+    - Build your image reading the config usually stored at `~/.config/atom-atic/Containerfile`
+    - Push it to the registry
+- Rebase to the newly built image
+
+And that's about it, you should check if the service `rpm-ostreed-automatic` is
+enabled, since this would be the service that actually updates the computer
+
+```bash
+systemctl enable rpm-ostreed-automatic.timer
+```

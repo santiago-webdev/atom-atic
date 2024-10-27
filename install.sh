@@ -43,8 +43,6 @@ insecure = true
 EOL
 
 cp ./atom-atic.sh ~/.local/bin
-
-podman run -d -p 5000:5000 --restart=always --name registry registry:latest
-podman push localhost/atom-atic:latest localhost:5000/atom-atic:latest
+./atom-atic.sh
 rpm-ostree rebase ostree-unverified-registry:localhost:5000/atom-atic:latest
 notify-send "atom-atic" "Rebase done, check 'rpm-ostree status'"
