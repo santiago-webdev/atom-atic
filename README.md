@@ -2,7 +2,7 @@
 
 This is a project very similar to [zerolayer](https://github.com/akdev1l/zerolayer),
 with the difference been that I use a local registry to serve the image instead of
-an oci archived image, but the concept is more or less the same.
+a local tarball, but the concept is more or less the same.
 
 First, create a configuration file, namely this is going to be a `Containerfile`:
 
